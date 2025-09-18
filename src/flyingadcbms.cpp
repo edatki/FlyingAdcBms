@@ -16,7 +16,6 @@
  * You should have received a copy of the GNU General Public License
  * along with this program.  If not, see <http://www.gnu.org/licenses/>.
  */
-#if defined HW_FLYING_ADC_V1 || defined HW_FLYING_ADC_V2 //To prevent errors as hardware specific parameters will be missing
 
 #include <libopencm3/stm32/gpio.h>
 #include <libopencm3/stm32/spi.h>
@@ -200,5 +199,3 @@ FlyingAdcBms::BalanceStatus FlyingAdcBms::SetBalancing(BmsAlgo::BalanceCommand c
 
    return stt;
 }
-
-#endif // defined(HW_V1) || defined(HW_V2)

@@ -40,7 +40,7 @@
     #include "maxbms.h"
     BmsHardware BmsIO::bmshardware = MaxBms();
 #else
-    #error "Unknown hardware platform"
+    #error "Unknown hardware variant"
 #endif
 
 BmsFsm* BmsIO::bmsFsm;

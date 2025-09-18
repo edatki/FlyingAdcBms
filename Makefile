@@ -37,9 +37,18 @@ LDFLAGS      = -Llibopencm3/lib -T$(LDSCRIPT) -march=armv7 -nostartfiles -Wl,--g
 OBJSL        = main.o hwinit.o stm32scheduler.o params.o  \
                my_string.o digio.o my_fp.o printf.o anain.o picontroller.o \
                param_save.o errormessage.o stm32_can.o canhardware.o canmap.o cansdo.o sdocommands.o \
-               terminalcommands.o bmsfsm.o bmsalgo.o bmsio.o temp_meas.o selftest.o \
-			   flyingadcbms.o cellmux.o bitbangi2c.o mcp3421.o pca9536.o \
-			   maxbms.o max17841b.o
+               terminalcommands.o bmsfsm.o bmsalgo.o bmsio.o temp_meas.o selftest.o
+				
+
+ifeq ($(HW), HW_FLYING_ADC_V1)
+	OBJSL += flyingadcbms.o cellmux.o bitbangi2c.o mcp3421.o pca9536.o
+endif
+ifeq ($(HW), HW_FLYING_ADC_V2)
+	OBJSL += flyingadcbms.o cellmux.o bitbangi2c.o mcp3421.o pca9536.o 
+endif
+ifeq ($(HW), HW_MAX17841B)
+	OBJSL += maxbms.o max17841b.o
+endif
 
 OBJS         = $(patsubst %.o,$(OUT_DIR)/%.o, $(OBJSL))
 DEPENDS      = $(patsubst %.o,$(OUT_DIR)/%.d, $(OBJSL))
@@ -67,6 +76,9 @@ LDFLAGS += $(call ld-option,--no-warn-rwx-segments)
 ifndef HW
 default: all
 else
+ifeq ($(filter $(HW),$(HW_LIST)),)
+    $(error Unsupported hardware variant)
+endif
 default: directories images
 endif
 
