@@ -69,6 +69,7 @@ BmsFsm::BmsFsm(CanMap* cm, CanSdo* cs)
  */
 BmsFsm::bmsstate BmsFsm::Run(bmsstate currentState)
 {
+
    uint32_t data[2] = { 0 };
    uint32_t sdoReply;
 
@@ -143,7 +144,7 @@ BmsFsm::bmsstate BmsFsm::Run(bmsstate currentState)
       break;
    case INIT:
       BmsIO::Init();
-      return SELFTEST;
+      // return SELFTEST;
    case SELFTEST:
       if (SelfTest::GetLastResult() == SelfTest::TestsDone)
          return RUN;

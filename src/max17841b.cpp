@@ -2,6 +2,7 @@
 #include <libopencm3/stm32/spi.h>
 #include "digio.h"
 #include "hwdefs.h"
+#include "max17841b.h"
 
 #define CMD_HELLO_ALL 0x57
 #define CMD_WRITE_ALL 0x02
@@ -14,47 +15,58 @@
 #define WR_LD_Q 0xC0
 #define RD_NXT_MSG 0x93
 
-// SPISettings MAX17841(4000000, MSBFIRST, SPI_MODE0);
-
 #define MAX_MODULES 32
 #define MAX_RX_MESSAGE_LENGTH (5 + (2 * MAX_MODULES))
 
-void LoadTransmitQueue(uint8_t *data, uint8_t length)
+
+
+uint8_t MAX17841B::ReadRegister(uint8_t regAddress) {
+    this->cs_pin->Clear();
+    spi_xfer(SPI2, regAddress);
+    uint8_t value = spi_xfer(SPI2, regAddress);
+    this->cs_pin->Set();
+    return value;
+}
+
+void MAX17841B::WriteRegister(uint8_t regAddress, uint8_t value) {
+}
+
+void MAX17841B::LoadTransmitQueue(uint8_t *data, uint8_t length)
 {
     //cs low
-    spi_xfer(SPI1, WR_LD_Q);
-    spi_xfer(SPI1, length);
-    for (uint8_t i = 0; i < length; i++) spi_xfer(SPI1, data[i]);
+    spi_xfer(this->spi_interface, WR_LD_Q);
+    spi_xfer(this->spi_interface, length);
+    for (uint8_t i = 0; i < length; i++) spi_xfer(this->spi_interface, data[i]);
     //cs high
 }
 
-void ReadReceiveQueue(uint8_t *data, uint8_t length) 
+void MAX17841B::ReadReceiveQueue(uint8_t *data, uint8_t length) 
 {
     //cs low
-    spi_xfer(SPI1, RD_NXT_MSG);
-    for (uint8_t i = 0; i < length; i++) data[i] = spi_xfer(SPI1, RD_NXT_MSG);
+    spi_xfer(this->spi_interface, RD_NXT_MSG);
+    for (uint8_t i = 0; i < length; i++) data[i] = spi_xfer(this->spi_interface, RD_NXT_MSG);
     //cs high
 }
 
-bool CheckReceiveBufferError() {
+bool MAX17841B::CheckReceiveBufferError() {
     //cs low
-    spi_xfer(SPI1, RD_RX_INT_FLAGS);
-    uint8_t check = spi_xfer(SPI1, RD_RX_INT_FLAGS);
+    spi_xfer(this->spi_interface, RD_RX_INT_FLAGS);
+    uint8_t check = spi_xfer(this->spi_interface, RD_RX_INT_FLAGS);
     //cs high
 
     if (check != 0x00)
     {
         // Clear error
         //cs low
-        spi_xfer(SPI1, WR_RX_INT_FLAGS);
-        spi_xfer(SPI1, 0x00);
+        spi_xfer(this->spi_interface, WR_RX_INT_FLAGS);
+        spi_xfer(this->spi_interface, 0x00);
         //cs high
     }
 
     return check != 0x00;
 }
 
-uint16_t ReadAddressedSlave(uint8_t dataRegister, uint8_t address, bool setupDone)
+uint16_t MAX17841B::ReadAddressedSlave(uint8_t dataRegister, uint8_t address, bool setupDone)
 {
 	uint8_t writeData[5] = {
         (uint8_t)(CMD_READ_DEVICE | (address << 3)),
@@ -120,7 +132,7 @@ uint16_t ReadAddressedSlave(uint8_t dataRegister, uint8_t address, bool setupDon
     return (readData[2] << 8) | readData[3];
 }
 
-void WriteAddressedSlave(uint8_t dataRegister, uint16_t data, uint8_t address, bool setupDone)
+void MAX17841B::WriteAddressedSlave(uint8_t dataRegister, uint16_t data, uint8_t address, bool setupDone)
 {
 	uint8_t writeData[6] = {
         (uint8_t)(CMD_WRITE_DEVICE | (address << 3)),

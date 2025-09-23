@@ -44,21 +44,15 @@
 //Params specific to Flying ADC BMS
 /*              category            name         unit       min     max     default id */
 #define PARAM_LIST_FLYING_ADC_BMS \
-   PARAM_ENTRY(CAT_FLYING_ADC_BMS,  gain,        "mV/dig",  1,      1000,   586,    3   ) \
-   PARAM_ENTRY(CAT_FLYING_ADC_BMS,  correction0, "ppm",     -10000, 10000,  -1250,  14  ) \
-   PARAM_ENTRY(CAT_FLYING_ADC_BMS,  correction1, "ppm",     -10000, 10000,  1500,   15  ) \
-   PARAM_ENTRY(CAT_FLYING_ADC_BMS,  correction15,"ppm",     -10000, 10000,  1000,   16  ) \
-
-#define CAT_FLYING_ADC_BMS  "Flying ADC BMS"
-
-
+   PARAM_ENTRY(CAT_BMS,  gain,        "mV/dig",  1,      1000,   586,    3   ) \
+   PARAM_ENTRY(CAT_BMS,  correction0, "ppm",     -10000, 10000,  -1250,  14  ) \
+   PARAM_ENTRY(CAT_BMS,  correction1, "ppm",     -10000, 10000,  1500,   15  ) \
+   PARAM_ENTRY(CAT_BMS,  correction15,"ppm",     -10000, 10000,  1000,   16  ) \
 
 //Params specific to MAX17841B BMS
 /*              category            name         unit       min     max     default id */
 #define PARAM_LIST_MAX_BMS \
-   PARAM_ENTRY(CAT_MAX_BMS,  test,        "test",  1,      1000,   586,    3   ) 
-
-#define CAT_MAX_BMS     "MAX17841B BMS"
+   PARAM_ENTRY(CAT_BMS,  test,        "test",  1,      1000,   586,    3   ) 
 
 
 

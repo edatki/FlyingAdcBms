@@ -8,12 +8,21 @@
  * or pull-down (INPUT_PD) or be an output (OUTPUT)
 */
 
+//Select which set of hardware specific io to use
+#ifdef HW_MAX17841B
+#define DIG_IO_LIST \
+    DIG_IO_ENTRY(nextena_out,GPIOA, GPIO9,   PinMode::OUTPUT)      \
+    DIG_IO_ENTRY(selfena_out,GPIOA, GPIO8,   PinMode::OUTPUT)      \
+    DIG_IO_ENTRY(led_out,    GPIOA, GPIO5,   PinMode::OUTPUT)      \
+    DIG_IO_ENTRY(max_cs,     GPIOB, GPIO12,  PinMode::OUTPUT)
+#else
 #define DIG_IO_LIST \
     DIG_IO_ENTRY(i2c_di,     GPIOB, GPIO14,  PinMode::INPUT_FLT)   \
     DIG_IO_ENTRY(i2c_scl,    GPIOB, GPIO13,  PinMode::OUTPUT)      \
     DIG_IO_ENTRY(i2c_do,     GPIOB, GPIO15,  PinMode::OUTPUT)      \
     DIG_IO_ENTRY(nextena_out,GPIOA, GPIO9,   PinMode::OUTPUT)      \
     DIG_IO_ENTRY(selfena_out,GPIOA, GPIO8,   PinMode::OUTPUT)      \
-    DIG_IO_ENTRY(led_out,    GPIOA, GPIO5,   PinMode::OUTPUT)      \
+    DIG_IO_ENTRY(led_out,    GPIOA, GPIO5,   PinMode::OUTPUT)
+#endif
 
 #endif // PinMode_PRJ_H_INCLUDED

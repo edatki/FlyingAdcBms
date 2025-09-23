@@ -79,7 +79,7 @@ SelfTest::TestResult SelfTest::RunTestMuxOff()
    //       return TestFailed;
    //    }
    // }
-   // return TestOngoing;
+   return TestOngoing;
 }
 
 /** \brief Test if balancer circuit works
@@ -119,7 +119,7 @@ SelfTest::TestResult SelfTest::RunTestBalancer()
    //    else
    //       return TestSuccess;
    // }
-   // return TestOngoing;
+   return TestOngoing;
 }
 
 SelfTest::TestResult SelfTest::TestCellConnection()
@@ -155,7 +155,7 @@ SelfTest::TestResult SelfTest::TestCellConnection()
    //    CellMux::SelectChannel(channel);
    //    MCP3421::StartAdc();
    // }
-   // return TestOngoing;
+   return TestOngoing;
 }
 
 /** \brief Last test, always return done

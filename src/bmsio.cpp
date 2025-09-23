@@ -32,19 +32,21 @@
 
 #ifdef HW_FLYING_ADC_V1
     #include "flyingadcbms.h"
-    BmsHardware BmsIO::bmshardware = FlyingAdcBms();
+   //  BmsHardware BmsIO::bmshardware = FlyingAdcBms();
+   FlyingAdcBms bmshardware = FlyingAdcBms();
 #elif HW_FLYING_ADC_V2
     #include "flyingadcbms.h"
-    BmsHardware BmsIO::bmshardware = FlyingAdcBms();
+   //  BmsHardware BmsIO::bmshardware = FlyingAdcBms();
+   FlyingAdcBms bmshardware = FlyingAdcBms();
 #elif HW_MAX17841B
     #include "maxbms.h"
-    BmsHardware BmsIO::bmshardware = MaxBms();
+   //  BmsHardware BmsIO::bmshardware = MaxBms();
+   MaxBms bmshardware = MaxBms();
 #else
     #error "Unknown hardware variant"
 #endif
 
 BmsFsm* BmsIO::bmsFsm;
-// int BmsIO::muxRequest = -1;
 
 void BmsIO::Init() 
 {
@@ -53,7 +55,7 @@ void BmsIO::Init()
 
 void BmsIO::ReadCellVoltages()
 {
-   bmshardware.Ms25Task();
+   // bmshardware.Ms25Task();
 }
 
 void BmsIO::ReadTemperatures()
