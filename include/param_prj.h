@@ -39,7 +39,7 @@
  */
 
  //Define a version string of your firmware here
-#define VERSION 0.29_edatki_experimental
+#define VERSION 0.29ed
 
 //Params specific to Flying ADC BMS
 /*              category            name         unit       min     max     default id */
@@ -219,7 +219,7 @@
 
 /***** Enum String definitions *****/
 #define HWREVS          "0=Unknown, 1=v1.x, 2=v2.0, 3=v2.1, 4=v2.2, 5=v2.3, 6=v2.4"
-#define OPMODES         "0=Boot, 1=GetAddr, 2=SetAddr, 3=ReqInfo, 4=RecvInfo, 5=Init, 6=SelfTest, 7=Run, 8=Idle, 9=Error"
+#define OPMODES         "0=Boot, 1=GetAddr, 2=SetAddr, 3=ReqInfo, 4=RecvInfo, 5=Init, 6=SelfTest, 7=Run, 8=Idle, 9=Error, 10=Reboot"
 #define OFFON           "0=Off, 1=On"
 #define BALMODE         "0=Off, 1=Additive, 2=Dissipative, 3=Both"
 #define BAL             "0=None, 1=Discharge, 2=ChargePos, 3=ChargeNeg"

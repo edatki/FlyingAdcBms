@@ -29,9 +29,10 @@ class SelfTest
       static void SetNumChannels(int c) { numChannels = c; }
       static int GetErrorChannel() { return errChannel; }
 
-   private:
       typedef TestResult (*TestFunction)(void);
 
+   private:
+      
       static TestResult RunTestMuxOff();
       static TestResult RunTestBalancer();
       static TestResult TestCellConnection();

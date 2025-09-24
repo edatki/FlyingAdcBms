@@ -147,7 +147,7 @@ BmsFsm::bmsstate BmsFsm::Run(bmsstate currentState)
       break;
    case INIT:
       BmsIO::Init();
-      // return SELFTEST;
+      return SELFTEST;
    case SELFTEST:
       if (SelfTest::GetLastResult() == SelfTest::TestsDone)
          return RUN;

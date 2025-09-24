@@ -20,11 +20,17 @@
 #define MAXBMS_H
 #include <stdint.h>
 #include "bmshardware.h"
+#include "selftest.h"
 
 class MaxBms //: public BmsHardware
 {
    public:
       static void Init();
+
+      static SelfTest::TestFunction testFunctions[];
+      
+   private:
+      static SelfTest::TestResult MaxChipIdentityTest();
    
 };
 
