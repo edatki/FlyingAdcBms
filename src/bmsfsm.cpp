@@ -78,6 +78,9 @@ BmsFsm::bmsstate BmsFsm::Run(bmsstate currentState)
    case BOOT:
       if (IsFirst())
       {
+         cycles = 0;
+         recvNodeId = Param::GetInt(Param::sdobase);
+         pdobase = Param::GetInt(Param::pdobase);
          canSdo->SetNodeId(recvNodeId);
          canMap->Clear();
          DigIo::nextena_out.Set();
@@ -155,6 +158,13 @@ BmsFsm::bmsstate BmsFsm::Run(bmsstate currentState)
       }
       break;
    case RUN:
+      if (!IsEnabled() && !IsFirst())
+      {
+         //sub modules turn off when main module turns off
+         DigIo::selfena_out.Clear();
+         DigIo::nextena_out.Clear();
+      }
+
       if (ABS(Param::GetFloat(Param::idcavg)) < Param::GetFloat(Param::idlethresh))
       {
          cycles++;
@@ -178,8 +188,14 @@ BmsFsm::bmsstate BmsFsm::Run(bmsstate currentState)
          return RUN;
       }
 
-      //After 2 hours turn off
-      if (cycles > 72000 && !IsEnabled())
+      if (!IsEnabled() && !IsFirst())
+      {
+         //sub modules turn off when main module turns off
+         DigIo::selfena_out.Clear();
+         DigIo::nextena_out.Clear();
+      }
+
+      if (cycles > (uint32_t)Param::GetInt(Param::turnoffwait) && !IsEnabled())
       {
          DigIo::selfena_out.Clear();
          DigIo::nextena_out.Clear();
@@ -188,6 +204,18 @@ BmsFsm::bmsstate BmsFsm::Run(bmsstate currentState)
    case ERROR:
       if (Param::GetBool(Param::enable))
          return RUN;
+      break;
+   case REBOOT:
+      if (DigIo::nextena_out.Get())
+         cycles = 0;
+
+      DigIo::nextena_out.Clear();
+      cycles++;
+
+      if (cycles == 10)
+      {
+         return BOOT;
+      }
       break;
    }
    return currentState;

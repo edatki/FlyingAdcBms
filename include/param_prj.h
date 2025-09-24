@@ -39,7 +39,7 @@
  */
 
  //Define a version string of your firmware here
-#define VERSION 0.28
+#define VERSION 0.29_edatki_experimental
 
 //Params specific to Flying ADC BMS
 /*              category            name         unit       min     max     default id */
@@ -69,149 +69,153 @@
    2. Temporary parameters (id = 0)
    3. Display values
  */
-//Next param id (increase when adding new parameter!): 58
+//Next param id (increase when adding new parameter!): 62
 //Next value Id: 2105
-/*              category            name         unit       min     max     default id */
+/*              category     name         unit       min     max     default id */
 #define PARAM_LIST \
    PARAM_LIST_HW_SPECIFIC \
-   PARAM_ENTRY(CAT_BMS,            numchan,     "",        1,      16,     16,     4   ) \
-   PARAM_ENTRY(CAT_BMS,            balmode,     BALMODE,   0,      3,      0,      5   ) \
-   PARAM_ENTRY(CAT_BMS,            ubalance,    "mV",      0,      4500,   4500,   30  ) \
-   PARAM_ENTRY(CAT_BMS,            idlewait,    "s",       0,      100000, 60,     12  ) \
-   PARAM_ENTRY(CAT_BMS,            idlethresh,  "A",       0,      10,     0.5,    55  ) \
-   PARAM_ENTRY(CAT_BAT,            dischargemax,"A",       1,      2047,   200,    32  ) \
-   PARAM_ENTRY(CAT_BAT,            nomcap,      "Ah",      0,      1000,   100,    9   ) \
-   PARAM_ENTRY(CAT_BAT,            icc1,        "A",       1,      2000,   50,     43  ) \
-   PARAM_ENTRY(CAT_BAT,            icc2,        "A",       1,      2000,   30,     44  ) \
-   PARAM_ENTRY(CAT_BAT,            icc3,        "A",       1,      2000,   20,     45  ) \
-   PARAM_ENTRY(CAT_BAT,            icutoff,     "A",       1,      200,    2,      57  ) \
-   PARAM_ENTRY(CAT_BAT,            ucv1,        "mV",      3000,   4500,   3900,   46  ) \
-   PARAM_ENTRY(CAT_BAT,            ucv2,        "mV",      3000,   4500,   4000,   47  ) \
-   PARAM_ENTRY(CAT_BAT,            ucellmax,    "mV",      1000,   4500,   4200,   29  ) \
-   PARAM_ENTRY(CAT_BAT,            ucellmin,    "mV",      1000,   4500,   3300,   28  ) \
-   PARAM_ENTRY(CAT_BAT,            ucellhyst,   "mV",      1000,   4500,   4150,   56  ) \
-   PARAM_ENTRY(CAT_BAT,            ucell0soc,   "mV",      2000,   4500,   3300,   17  ) \
-   PARAM_ENTRY(CAT_BAT,            ucell10soc,  "mV",      2000,   4500,   3400,   18  ) \
-   PARAM_ENTRY(CAT_BAT,            ucell20soc,  "mV",      2000,   4500,   3450,   19  ) \
-   PARAM_ENTRY(CAT_BAT,            ucell30soc,  "mV",      2000,   4500,   3500,   20  ) \
-   PARAM_ENTRY(CAT_BAT,            ucell40soc,  "mV",      2000,   4500,   3560,   21  ) \
-   PARAM_ENTRY(CAT_BAT,            ucell50soc,  "mV",      2000,   4500,   3600,   22  ) \
-   PARAM_ENTRY(CAT_BAT,            ucell60soc,  "mV",      2000,   4500,   3700,   23  ) \
-   PARAM_ENTRY(CAT_BAT,            ucell70soc,  "mV",      2000,   4500,   3800,   24  ) \
-   PARAM_ENTRY(CAT_BAT,            ucell80soc,  "mV",      2000,   4500,   4000,   25  ) \
-   PARAM_ENTRY(CAT_BAT,            ucell90soc,  "mV",      2000,   4500,   4100,   26  ) \
-   PARAM_ENTRY(CAT_BAT,            ucell100soc, "mV",      2000,   4500,   4200,   27  ) \
-   PARAM_ENTRY(CAT_BAT,            sohpreset,   "%",       10,     100,    100,    53  ) \
-   PARAM_ENTRY(CAT_SENS,           idcgain,     "dig/A",  -1000,   1000,   10,     6   ) \
-   PARAM_ENTRY(CAT_SENS,           idcofs,      "dig",    -4095,   4095,   0,      7   ) \
-   PARAM_ENTRY(CAT_SENS,           idcmode,     IDCMODES,  0,      3,      0,      8   ) \
-   PARAM_ENTRY(CAT_SENS,           tempsns,     TEMPSNS,   0,      3,      0,      52  ) \
-   PARAM_ENTRY(CAT_SENS,           tempres,     "Ohm",     10,     500000, 10000,  50  ) \
-   PARAM_ENTRY(CAT_SENS,           tempbeta,    "",        1,      100000, 3900,   51  ) \
-   PARAM_ENTRY(CAT_COMM,           pdobase,     "",        0,      2047,   500,    10  ) \
-   PARAM_ENTRY(CAT_COMM,           sdobase,     "",        0,      63,     10,     11  ) \
-   TESTP_ENTRY(CAT_TEST,           enable,      OFFON,     0,      1,      1,      48  ) \
-   TESTP_ENTRY(CAT_TEST,           testchan,    "",        -1,     15,     -1,     49  ) \
-   TESTP_ENTRY(CAT_TEST,           testbalance, BALMODE,   0,      2,      0,      54  ) \
-   VALUE_ENTRY(version,            VERSTR, 2001 ) \
-   VALUE_ENTRY(hwrev,              HWREVS, 2104 ) \
-   VALUE_ENTRY(opmode,             OPMODES,2000 ) \
-   VALUE_ENTRY(lasterr,            errorListString,2101 ) \
-   VALUE_ENTRY(errinfo,            "",     2102 ) \
-   VALUE_ENTRY(modaddr,            "",     2045 ) \
-   VALUE_ENTRY(modnum,             "",     2046 ) \
-   VALUE_ENTRY(totalcells,         "",     2074 ) \
-   VALUE_ENTRY(counter,            "",     2076 ) \
-   VALUE_ENTRY(uptime,             "s",    2103 ) \
-   VALUE_ENTRY(chargein,           "As",   2040 ) \
-   VALUE_ENTRY(chargeout,          "As",   2041 ) \
-   VALUE_ENTRY(soc,                "%",    2071 ) \
-   VALUE_ENTRY(soh,                "%",    2086 ) \
-   VALUE_ENTRY(chargelim,          "A",    2072 ) \
-   VALUE_ENTRY(dischargelim,       "A",    2073 ) \
-   VALUE_ENTRY(idc,                "A",    2042 ) \
-   VALUE_ENTRY(idcavg,             "A",    2043 ) \
-   VALUE_ENTRY(power,              "W",    2075 ) \
-   VALUE_ENTRY(tempmin,            "°C",   2044 ) \
-   VALUE_ENTRY(tempmax,            "°C",   2077 ) \
-   VALUE_ENTRY(uavg,               "mV",   2002 ) \
-   VALUE_ENTRY(umin,               "mV",   2003 ) \
-   VALUE_ENTRY(umax,               "mV",   2004 ) \
-   VALUE_ENTRY(udelta,             "mV",   2005 ) \
-   VALUE_ENTRY(utotal,             "mV",   2039 ) \
-   VALUE_ENTRY(u0,                 "mV",   2006 ) \
-   VALUE_ENTRY(u1,                 "mV",   2007 ) \
-   VALUE_ENTRY(u2,                 "mV",   2008 ) \
-   VALUE_ENTRY(u3,                 "mV",   2009 ) \
-   VALUE_ENTRY(u4,                 "mV",   2010 ) \
-   VALUE_ENTRY(u5,                 "mV",   2011 ) \
-   VALUE_ENTRY(u6,                 "mV",   2012 ) \
-   VALUE_ENTRY(u7,                 "mV",   2013 ) \
-   VALUE_ENTRY(u8,                 "mV",   2014 ) \
-   VALUE_ENTRY(u9,                 "mV",   2015 ) \
-   VALUE_ENTRY(u10,                "mV",   2016 ) \
-   VALUE_ENTRY(u11,                "mV",   2017 ) \
-   VALUE_ENTRY(u12,                "mV",   2018 ) \
-   VALUE_ENTRY(u13,                "mV",   2019 ) \
-   VALUE_ENTRY(u14,                "mV",   2020 ) \
-   VALUE_ENTRY(u15,                "mV",   2021 ) \
-   VALUE_ENTRY(uavg0,              "mV",   2047 ) \
-   VALUE_ENTRY(umin0,              "mV",   2048 ) \
-   VALUE_ENTRY(umax0,              "mV",   2049 ) \
-   VALUE_ENTRY(tempmin0,           "°C",   2078 ) \
-   VALUE_ENTRY(tempmax0,           "°C",   2079 ) \
-   VALUE_ENTRY(uavg1,              "mV",   2050 ) \
-   VALUE_ENTRY(umin1,              "mV",   2051 ) \
-   VALUE_ENTRY(umax1,              "mV",   2052 ) \
-   VALUE_ENTRY(tempmin1,           "°C",   2087 ) \
-   VALUE_ENTRY(tempmax1,           "°C",   2088 ) \
-   VALUE_ENTRY(uavg2,              "mV",   2053 ) \
-   VALUE_ENTRY(umin2,              "mV",   2054 ) \
-   VALUE_ENTRY(umax2,              "mV",   2055 ) \
-   VALUE_ENTRY(tempmin2,           "°C",   2089 ) \
-   VALUE_ENTRY(tempmax2,           "°C",   2090 ) \
-   VALUE_ENTRY(uavg3,              "mV",   2056 ) \
-   VALUE_ENTRY(umin3,              "mV",   2057 ) \
-   VALUE_ENTRY(umax3,              "mV",   2058 ) \
-   VALUE_ENTRY(tempmin3,           "°C",   2091 ) \
-   VALUE_ENTRY(tempmax3,           "°C",   2092 ) \
-   VALUE_ENTRY(uavg4,              "mV",   2059 ) \
-   VALUE_ENTRY(umin4,              "mV",   2060 ) \
-   VALUE_ENTRY(umax4,              "mV",   2061 ) \
-   VALUE_ENTRY(tempmin4,           "°C",   2093 ) \
-   VALUE_ENTRY(tempmax4,           "°C",   2094 ) \
-   VALUE_ENTRY(uavg5,              "mV",   2062 ) \
-   VALUE_ENTRY(umin5,              "mV",   2063 ) \
-   VALUE_ENTRY(umax5,              "mV",   2064 ) \
-   VALUE_ENTRY(tempmin5,           "°C",   2095 ) \
-   VALUE_ENTRY(tempmax5,           "°C",   2096 ) \
-   VALUE_ENTRY(uavg6,              "mV",   2065 ) \
-   VALUE_ENTRY(umin6,              "mV",   2066 ) \
-   VALUE_ENTRY(umax6,              "mV",   2067 ) \
-   VALUE_ENTRY(tempmin6,           "°C",   2097 ) \
-   VALUE_ENTRY(tempmax6,           "°C",   2098 ) \
-   VALUE_ENTRY(uavg7,              "mV",   2068 ) \
-   VALUE_ENTRY(umin7,              "mV",   2069 ) \
-   VALUE_ENTRY(umax7,              "mV",   2070 ) \
-   VALUE_ENTRY(tempmin7,           "°C",   2099 ) \
-   VALUE_ENTRY(tempmax7,           "°C",   2100 ) \
-   VALUE_ENTRY(u0cmd,              BAL,    2022 ) \
-   VALUE_ENTRY(u1cmd,              BAL,    2023 ) \
-   VALUE_ENTRY(u2cmd,              BAL,    2024 ) \
-   VALUE_ENTRY(u3cmd,              BAL,    2025 ) \
-   VALUE_ENTRY(u4cmd,              BAL,    2026 ) \
-   VALUE_ENTRY(u5cmd,              BAL,    2027 ) \
-   VALUE_ENTRY(u6cmd,              BAL,    2028 ) \
-   VALUE_ENTRY(u7cmd,              BAL,    2029 ) \
-   VALUE_ENTRY(u8cmd,              BAL,    2030 ) \
-   VALUE_ENTRY(u9cmd,              BAL,    2031 ) \
-   VALUE_ENTRY(u10cmd,             BAL,    2032 ) \
-   VALUE_ENTRY(u11cmd,             BAL,    2033 ) \
-   VALUE_ENTRY(u12cmd,             BAL,    2034 ) \
-   VALUE_ENTRY(u13cmd,             BAL,    2035 ) \
-   VALUE_ENTRY(u14cmd,             BAL,    2036 ) \
-   VALUE_ENTRY(u15cmd,             BAL,    2037 ) \
-   VALUE_ENTRY(cpuload,            "%",    2038 )
+   PARAM_ENTRY(CAT_BMS,     numchan,     "",        1,      16,     16,     4   ) \
+   PARAM_ENTRY(CAT_BMS,     balmode,     BALMODE,   0,      3,      0,      5   ) \
+   PARAM_ENTRY(CAT_BMS,     ubalance,    "mV",      0,      4500,   4500,   30  ) \
+   PARAM_ENTRY(CAT_BMS,     idlewait,    "s",       0,      100000, 60,     12  ) \
+   PARAM_ENTRY(CAT_BMS,     turnoffwait, "s",       0,      999999, 72000,  58  ) \
+   PARAM_ENTRY(CAT_BMS,     idlethresh,  "A",       0,      10,     0.5,    55  ) \
+   PARAM_ENTRY(CAT_BAT,     dischargemax,"A",       1,      2047,   200,    32  ) \
+   PARAM_ENTRY(CAT_BAT,     nomcap,      "Ah",      0,      1000,   100,    9   ) \
+   PARAM_ENTRY(CAT_BAT,     icc1,        "A",       1,      2000,   50,     43  ) \
+   PARAM_ENTRY(CAT_BAT,     icc2,        "A",       1,      2000,   30,     44  ) \
+   PARAM_ENTRY(CAT_BAT,     icc3,        "A",       1,      2000,   20,     45  ) \
+   PARAM_ENTRY(CAT_BAT,     icutoff,     "A",       1,      200,    2,      57  ) \
+   PARAM_ENTRY(CAT_BAT,     ucv1,        "mV",      3000,   4500,   3900,   46  ) \
+   PARAM_ENTRY(CAT_BAT,     ucv2,        "mV",      3000,   4500,   4000,   47  ) \
+   PARAM_ENTRY(CAT_BAT,     ucellmax,    "mV",      1000,   4500,   4200,   29  ) \
+   PARAM_ENTRY(CAT_BAT,     ucellmin,    "mV",      1000,   4500,   3300,   28  ) \
+   PARAM_ENTRY(CAT_BAT,     ucellhyst,   "mV",      1000,   4500,   4150,   56  ) \
+   PARAM_ENTRY(CAT_BAT,     ucellkp,     "",        0.03,   100,    1,      59  ) \
+   PARAM_ENTRY(CAT_BAT,     ucellki,     "",        0.03,   100,    1,      60  ) \
+   PARAM_ENTRY(CAT_BAT,     ucell0soc,   "mV",      2000,   4500,   3300,   17  ) \
+   PARAM_ENTRY(CAT_BAT,     ucell10soc,  "mV",      2000,   4500,   3400,   18  ) \
+   PARAM_ENTRY(CAT_BAT,     ucell20soc,  "mV",      2000,   4500,   3450,   19  ) \
+   PARAM_ENTRY(CAT_BAT,     ucell30soc,  "mV",      2000,   4500,   3500,   20  ) \
+   PARAM_ENTRY(CAT_BAT,     ucell40soc,  "mV",      2000,   4500,   3560,   21  ) \
+   PARAM_ENTRY(CAT_BAT,     ucell50soc,  "mV",      2000,   4500,   3600,   22  ) \
+   PARAM_ENTRY(CAT_BAT,     ucell60soc,  "mV",      2000,   4500,   3700,   23  ) \
+   PARAM_ENTRY(CAT_BAT,     ucell70soc,  "mV",      2000,   4500,   3800,   24  ) \
+   PARAM_ENTRY(CAT_BAT,     ucell80soc,  "mV",      2000,   4500,   4000,   25  ) \
+   PARAM_ENTRY(CAT_BAT,     ucell90soc,  "mV",      2000,   4500,   4100,   26  ) \
+   PARAM_ENTRY(CAT_BAT,     ucell100soc, "mV",      2000,   4500,   4200,   27  ) \
+   PARAM_ENTRY(CAT_BAT,     sohpreset,   "%",       10,     100,    100,    53  ) \
+   PARAM_ENTRY(CAT_SENS,    idcgain,     "dig/A",  -1000,   1000,   10,     6   ) \
+   PARAM_ENTRY(CAT_SENS,    idcofs,      "dig",    -4095,   4095,   0,      7   ) \
+   PARAM_ENTRY(CAT_SENS,    idcmode,     IDCMODES,  0,      3,      0,      8   ) \
+   PARAM_ENTRY(CAT_SENS,    tempsns,     TEMPSNS,   0,      3,      0,      52  ) \
+   PARAM_ENTRY(CAT_SENS,    tempres,     "Ohm",     10,     500000, 10000,  50  ) \
+   PARAM_ENTRY(CAT_SENS,    tempbeta,    "",        1,      100000, 3900,   51  ) \
+   PARAM_ENTRY(CAT_COMM,    pdobase,     "",        0,      2047,   500,    10  ) \
+   PARAM_ENTRY(CAT_COMM,    sdobase,     "",        0,      63,     10,     11  ) \
+   TESTP_ENTRY(CAT_TEST,    enable,      OFFON,     0,      1,      1,      48  ) \
+   TESTP_ENTRY(CAT_TEST,    testchan,    "",        -1,     15,     -1,     49  ) \
+   TESTP_ENTRY(CAT_TEST,    testbalance, BALMODE,   0,      2,      0,      54  ) \
+   TESTP_ENTRY(CAT_TEST,    reboot,      OFFON,     0,      1,      0,      61  ) \
+   VALUE_ENTRY(version,     VERSTR, 2001 ) \
+   VALUE_ENTRY(hwrev,       HWREVS, 2104 ) \
+   VALUE_ENTRY(opmode,      OPMODES,2000 ) \
+   VALUE_ENTRY(lasterr,     errorListString,2101 ) \
+   VALUE_ENTRY(errinfo,     "",     2102 ) \
+   VALUE_ENTRY(modaddr,     "",     2045 ) \
+   VALUE_ENTRY(modnum,      "",     2046 ) \
+   VALUE_ENTRY(totalcells,  "",     2074 ) \
+   VALUE_ENTRY(counter,     "",     2076 ) \
+   VALUE_ENTRY(uptime,      "s",    2103 ) \
+   VALUE_ENTRY(chargein,    "As",   2040 ) \
+   VALUE_ENTRY(chargeout,   "As",   2041 ) \
+   VALUE_ENTRY(soc,         "%",    2071 ) \
+   VALUE_ENTRY(soh,         "%",    2086 ) \
+   VALUE_ENTRY(chargelim,   "A",    2072 ) \
+   VALUE_ENTRY(dischargelim,"A",    2073 ) \
+   VALUE_ENTRY(idc,         "A",    2042 ) \
+   VALUE_ENTRY(idcavg,      "A",    2043 ) \
+   VALUE_ENTRY(power,       "W",    2075 ) \
+   VALUE_ENTRY(tempmin,     "°C",   2044 ) \
+   VALUE_ENTRY(tempmax,     "°C",   2077 ) \
+   VALUE_ENTRY(uavg,        "mV",   2002 ) \
+   VALUE_ENTRY(umin,        "mV",   2003 ) \
+   VALUE_ENTRY(umax,        "mV",   2004 ) \
+   VALUE_ENTRY(udelta,      "mV",   2005 ) \
+   VALUE_ENTRY(utotal,      "mV",   2039 ) \
+   VALUE_ENTRY(u0,          "mV",   2006 ) \
+   VALUE_ENTRY(u1,          "mV",   2007 ) \
+   VALUE_ENTRY(u2,          "mV",   2008 ) \
+   VALUE_ENTRY(u3,          "mV",   2009 ) \
+   VALUE_ENTRY(u4,          "mV",   2010 ) \
+   VALUE_ENTRY(u5,          "mV",   2011 ) \
+   VALUE_ENTRY(u6,          "mV",   2012 ) \
+   VALUE_ENTRY(u7,          "mV",   2013 ) \
+   VALUE_ENTRY(u8,          "mV",   2014 ) \
+   VALUE_ENTRY(u9,          "mV",   2015 ) \
+   VALUE_ENTRY(u10,         "mV",   2016 ) \
+   VALUE_ENTRY(u11,         "mV",   2017 ) \
+   VALUE_ENTRY(u12,         "mV",   2018 ) \
+   VALUE_ENTRY(u13,         "mV",   2019 ) \
+   VALUE_ENTRY(u14,         "mV",   2020 ) \
+   VALUE_ENTRY(u15,         "mV",   2021 ) \
+   VALUE_ENTRY(uavg0,       "mV",   2047 ) \
+   VALUE_ENTRY(umin0,       "mV",   2048 ) \
+   VALUE_ENTRY(umax0,       "mV",   2049 ) \
+   VALUE_ENTRY(tempmin0,    "°C",   2078 ) \
+   VALUE_ENTRY(tempmax0,    "°C",   2079 ) \
+   VALUE_ENTRY(uavg1,       "mV",   2050 ) \
+   VALUE_ENTRY(umin1,       "mV",   2051 ) \
+   VALUE_ENTRY(umax1,       "mV",   2052 ) \
+   VALUE_ENTRY(tempmin1,    "°C",   2087 ) \
+   VALUE_ENTRY(tempmax1,    "°C",   2088 ) \
+   VALUE_ENTRY(uavg2,       "mV",   2053 ) \
+   VALUE_ENTRY(umin2,       "mV",   2054 ) \
+   VALUE_ENTRY(umax2,       "mV",   2055 ) \
+   VALUE_ENTRY(tempmin2,    "°C",   2089 ) \
+   VALUE_ENTRY(tempmax2,    "°C",   2090 ) \
+   VALUE_ENTRY(uavg3,       "mV",   2056 ) \
+   VALUE_ENTRY(umin3,       "mV",   2057 ) \
+   VALUE_ENTRY(umax3,       "mV",   2058 ) \
+   VALUE_ENTRY(tempmin3,    "°C",   2091 ) \
+   VALUE_ENTRY(tempmax3,    "°C",   2092 ) \
+   VALUE_ENTRY(uavg4,       "mV",   2059 ) \
+   VALUE_ENTRY(umin4,       "mV",   2060 ) \
+   VALUE_ENTRY(umax4,       "mV",   2061 ) \
+   VALUE_ENTRY(tempmin4,    "°C",   2093 ) \
+   VALUE_ENTRY(tempmax4,    "°C",   2094 ) \
+   VALUE_ENTRY(uavg5,       "mV",   2062 ) \
+   VALUE_ENTRY(umin5,       "mV",   2063 ) \
+   VALUE_ENTRY(umax5,       "mV",   2064 ) \
+   VALUE_ENTRY(tempmin5,    "°C",   2095 ) \
+   VALUE_ENTRY(tempmax5,    "°C",   2096 ) \
+   VALUE_ENTRY(uavg6,       "mV",   2065 ) \
+   VALUE_ENTRY(umin6,       "mV",   2066 ) \
+   VALUE_ENTRY(umax6,       "mV",   2067 ) \
+   VALUE_ENTRY(tempmin6,    "°C",   2097 ) \
+   VALUE_ENTRY(tempmax6,    "°C",   2098 ) \
+   VALUE_ENTRY(uavg7,       "mV",   2068 ) \
+   VALUE_ENTRY(umin7,       "mV",   2069 ) \
+   VALUE_ENTRY(umax7,       "mV",   2070 ) \
+   VALUE_ENTRY(tempmin7,    "°C",   2099 ) \
+   VALUE_ENTRY(tempmax7,    "°C",   2100 ) \
+   VALUE_ENTRY(u0cmd,       BAL,    2022 ) \
+   VALUE_ENTRY(u1cmd,       BAL,    2023 ) \
+   VALUE_ENTRY(u2cmd,       BAL,    2024 ) \
+   VALUE_ENTRY(u3cmd,       BAL,    2025 ) \
+   VALUE_ENTRY(u4cmd,       BAL,    2026 ) \
+   VALUE_ENTRY(u5cmd,       BAL,    2027 ) \
+   VALUE_ENTRY(u6cmd,       BAL,    2028 ) \
+   VALUE_ENTRY(u7cmd,       BAL,    2029 ) \
+   VALUE_ENTRY(u8cmd,       BAL,    2030 ) \
+   VALUE_ENTRY(u9cmd,       BAL,    2031 ) \
+   VALUE_ENTRY(u10cmd,      BAL,    2032 ) \
+   VALUE_ENTRY(u11cmd,      BAL,    2033 ) \
+   VALUE_ENTRY(u12cmd,      BAL,    2034 ) \
+   VALUE_ENTRY(u13cmd,      BAL,    2035 ) \
+   VALUE_ENTRY(u14cmd,      BAL,    2036 ) \
+   VALUE_ENTRY(u15cmd,      BAL,    2037 ) \
+   VALUE_ENTRY(cpuload,     "%",    2038 )
 
 /***** Enum String definitions *****/
 #define HWREVS          "0=Unknown, 1=v1.x, 2=v2.0, 3=v2.1, 4=v2.2, 5=v2.3, 6=v2.4"
